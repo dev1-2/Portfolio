@@ -6,33 +6,108 @@
     <title>Mein Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+                /* Animierter Glow-Rahmen für WOW-Karten */
+                @keyframes wow-glow {
+                    0% { box-shadow: 0 0 40px 10px #9859b7, 0 8px 32px 0 rgba(0,0,0,0.4); }
+                    50% { box-shadow: 0 0 80px 30px #ff7e5f, 0 16px 64px 0 rgba(0,0,0,0.6); }
+                    100% { box-shadow: 0 0 40px 10px #9859b7, 0 8px 32px 0 rgba(0,0,0,0.4); }
+                }
+                .wow-card {
+                    animation: wow-glow 2.5s infinite alternate;
+                }
+                .wow-card .project-icon {
+                    position: absolute;
+                    top: 18px;
+                    right: 18px;
+                    font-size: 2.5rem;
+                    color: #ff7e5f;
+                    filter: drop-shadow(0 0 12px #ff7e5f);
+                    animation: icon-pop 1.2s infinite alternate;
+                }
+                @keyframes icon-pop {
+                    0% { transform: scale(1) rotate(-8deg); }
+                    50% { transform: scale(1.18) rotate(8deg); }
+                    100% { transform: scale(1) rotate(-8deg); }
+                }
         /* Grundlegende Variablen */
-        :root {
-            --primary-color: #2d46b9;
-            --primary-dark: #1c2e8a;
-            --primary-light: #4f67d1;
-            --accent-color: #ff7e5f;
-            --text-color: #333;
-            --text-light: #666;
-            --bg-color: #f9f9f9;
-            --card-bg: #ffffff;
-            --border-radius: 12px;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-            --section-padding: 100px 0;
+        /* WOW-Effekt für Projektkarten */
+        .wow-card {
+            box-shadow: 0 0 40px 10px #9859b7, 0 8px 32px 0 rgba(0,0,0,0.4);
+            border-radius: 18px;
+            border: 2px solid #9859b7;
+            background: linear-gradient(135deg, #343541 60%, #9859b7 100%);
+            transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-
-        /* Dark Mode Variablen */
-        .dark-mode {
-            --primary-color: #4f67d1;
-            --primary-dark: #2d46b9;
-            --primary-light: #7a8de0;
-            --accent-color: #ff7e5f;
-            --text-color: #e0e0e0;
-            --text-light: #b0b0b0;
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        .wow-card:hover {
+            transform: scale(1.04) rotate(-1deg);
+            box-shadow: 0 0 80px 20px #9859b7, 0 16px 64px 0 rgba(0,0,0,0.6);
+            z-index: 2;
+        }
+        .wow-card .project-title {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-shadow: none;
+            letter-spacing: 1px;
+        }
+        .wow-card .project-description {
+            font-size: 1.15rem;
+            color: var(--text-color);
+            margin-top: 10px;
+            text-shadow: none;
+        }
+        .wow-card .project-tags {
+            margin-bottom: 8px;
+        }
+        .wow-card .project-tag {
+            background: var(--card-bg);
+            color: var(--text-color);
+            border-radius: 8px;
+            padding: 4px 12px;
+            margin-right: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 0 8px #9859b7;
+        }
+        .wow-card .project-image {
+            border-radius: 14px;
+            box-shadow: 0 0 24px #9859b7;
+            margin-bottom: 18px;
+            width: 100%;
+            object-fit: cover;
+            max-height: 220px;
+            transition: box-shadow 0.3s;
+        }
+        .wow-card:hover .project-image {
+            box-shadow: 0 0 48px #9859b7;
+        }
+        :root {
+            --primary-color: #2db96a;
+            --primary-dark: #1c8a4f;
+            --primary-light: #4fd18a;
+            --accent-color: #7eff5f;
+            --text-color: #23243a;
+            --text-light: #4a4a5a;
+            --bg-color: #fff;
+            --card-bg: #f7f7f7;
+            --border-radius: 16px;
+            --shadow: 0 4px 18px rgba(0,0,0,0.07);
+            --transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+            --section-padding: 110px 0;
+        }
+    .dark-mode {
+            --primary-color: #d72660;
+            --primary-dark: #a81346;
+            --primary-light: #ff7eb9;
+            --accent-color: #ffb3c6;
+        --text-color: #f7f7f7;
+        --text-light: #e0e0e0;
+        --bg-color: #121212;
+        --card-bg: #1e1e1e;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
         }
 
         /* Grundlegende Styles */
@@ -53,7 +128,7 @@
 
         a {
             text-decoration: none;
-            color: var(--primary-color);
+            color: var(--text-color);
             transition: var(--transition);
         }
 
@@ -73,10 +148,16 @@
         }
 
         .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
+            font-size: 3.2rem;
+            margin-bottom: 62px;
             text-align: center;
             position: relative;
+            font-family: 'Segoe UI', 'Montserrat', 'Arial', sans-serif;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            background: none;
+            color: var(--primary-color);
+            text-shadow: 0 2px 12px #eaeaea, 0 1px 8px #9859b7;
         }
 
         .section-title::after {
@@ -93,22 +174,23 @@
 
         .btn {
             display: inline-block;
-            padding: 12px 30px;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 50px;
-            font-weight: 600;
+            padding: 14px 34px;
+            background: linear-gradient(90deg, var(--primary-color) 60%, var(--accent-color) 100%);
+            color: #fff;
+            border-radius: 60px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
             transition: var(--transition);
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(45, 70, 185, 0.3);
+            box-shadow: 0 2px 10px rgba(45, 70, 185, 0.10);
         }
 
         .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(45, 70, 185, 0.4);
-            color: white;
+            background: var(--accent-color);
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 8px 24px rgba(45, 70, 185, 0.13);
+            color: #fff;
         }
 
         .btn-outline {
@@ -248,6 +330,7 @@
 
         .hero-description {
             margin-bottom: 40px;
+            
             font-size: 1.1rem;
         }
 
@@ -422,11 +505,12 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            border: 1.5px solid #eaeaea;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-7px) scale(1.03);
+            box-shadow: 0 18px 44px rgba(45,70,185,0.09);
         }
 
         .project-image {
@@ -456,6 +540,8 @@
         .project-title {
             font-size: 1.5rem;
             margin-bottom: 15px;
+            color: var(--text-color);
+            font-weight: 800;
         }
 
         .project-description {
@@ -485,16 +571,17 @@
         .service-card {
             background: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 40px 30px;
+            padding: 44px 34px;
             text-align: center;
             box-shadow: var(--shadow);
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            border: 1.5px solid #eaeaea;
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-7px) scale(1.03);
         }
 
         .service-card::before {
@@ -517,16 +604,18 @@
             border-radius: 50%;
             margin: 0 auto 25px;
             font-size: 1.8rem;
-            color: var(--primary-color);
+            color: #1c2e8a;
         }
 
         .service-title {
             font-size: 1.5rem;
             margin-bottom: 15px;
+            color: var(--text-color);
+            font-weight: 800;
         }
 
         .service-description {
-            color: var(--text-light);
+            color: var(--text-color);
         }
 
         /* Contact Section */
@@ -577,7 +666,7 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 36px;
         }
 
         .form-group label {
@@ -591,7 +680,7 @@
             padding: 12px 15px;
             border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            background: var(--bg-color);
+            background: #f7f7f7;
             color: var(--text-color);
             transition: var(--transition);
         }
@@ -609,8 +698,8 @@
 
         /* Footer */
         footer {
-            background: var(--primary-dark);
-            color: white;
+            background: #f7f7f7;
+            color: var(--text-color);
             padding: 60px 0 30px;
         }
 
@@ -626,6 +715,7 @@
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 10px;
+            color: var(--primary-color);
         }
 
         .footer-col h3::after {
@@ -716,6 +806,7 @@
 
             .section-title {
                 font-size: 2rem;
+                color: var(--primary-color);
             }
 
             .hero {
@@ -794,6 +885,13 @@
         }
 
         /* Animations */
+                /* Dark Mode Anpassungen für Footer und Überschriften */
+                .dark-mode .section-title,
+                .dark-mode .footer-col h3,
+                .dark-mode footer,
+                .dark-mode .footer-bottom p {
+                    color: #ff7eb9 !important;
+                }
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -859,22 +957,19 @@
             <div class="hero-content fade-in">
                 <span class="hero-greeting">Hallo, ich bin</span>
                 <h1 class="hero-name">Jasper Haas</h1>
-                <h2 class="hero-title">Webentwickler & Designer</h2>
+                <h2 class="hero-title">Python Developer & KI-Enthusiast</h2>
                 <p class="hero-description">
-                    Ich entwickle moderne, responsive Websites und Anwendungen mit Fokus auf Benutzerfreundlichkeit und Performance.
+                    Spezialisiert auf Python, KI, Automatisierung, Backend-Entwicklung und Data Science. Leidenschaft für smarte Lösungen und innovative Technologien.
                 </p>
                 <div class="hero-buttons">
                     <a href="#projects" class="btn">Meine Projekte</a>
-                    <a href="#contact" class="btn btn-outline">Kontakt</a>
+                    <a href="#contact-formular" class="btn btn-outline">Kontakt</a>
                 </div>
                 <div class="social-links">
                     <a href="https://github.com/dev1-2" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/ja.sper09/" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <img src="assets/profile.jpg" alt="Jasper Haas" class="hero-image fade-in delay-2">
         </div>
         <div class="hero-bg-shape"></div>
     </section>
@@ -885,29 +980,27 @@
             <h2 class="section-title">Über mich</h2>
             <div class="about-content">
                 <div class="about-image fade-in">
-                    <img src="assets/about-me.jpg" alt="Über mich">
                 </div>
                 <div class="about-text fade-in delay-1">
                     <h3>Lerne mich kennen</h3>
                     <p>
-                        Ich bin ein Webentwickler mit Leidenschaft für die Erstellung moderner Websites und Webanwendungen. Meine Reise begann mit HTML und CSS, und seitdem habe ich mich kontinuierlich weiterentwickelt, um mit den neuesten Technologien Schritt zu halten.
+                        Ich bin ein leidenschaftlicher Python Developer mit Fokus auf KI, Automatisierung und Backend-Systeme. Mein Weg begann mit kleinen Automatisierungsskripten und führte über Machine Learning bis hin zu komplexen KI-Projekten und APIs.
                     </p>
                     <p>
-                        Mein Ziel ist es, benutzerfreundliche, zugängliche und visuell ansprechende digitale Erlebnisse zu schaffen. Ich lerne ständig neue Technologien und Methoden, um meine Fähigkeiten zu verbessern.
+                        Mein Ziel ist es, mit Python innovative Lösungen zu entwickeln, die echten Mehrwert bieten – von Data Science über KI-gestützte Anwendungen bis zu modernen Backends. Ständige Weiterbildung und Neugier treiben mich an.
                     </p>
                     <div class="skills">
                         <h4>Meine Fähigkeiten</h4>
                         <div class="skill-tags">
-                            <span class="skill-tag">HTML5</span>
-                            <span class="skill-tag">CSS3</span>
-                            <span class="skill-tag">JavaScript</span>
                             <span class="skill-tag">Python</span>
-                            <span class="skill-tag">React</span>
-                            <span class="skill-tag">UI/UX Design</span>
-                            <span class="skill-tag">Responsive Design</span>
+                            <span class="skill-tag">KI & Machine Learning</span>
+                            <span class="skill-tag">Automatisierung</span>
+                            <span class="skill-tag">Backend-Entwicklung</span>
+                            <span class="skill-tag">Data Science</span>
+                            <span class="skill-tag">API Design</span>
+                            <span class="skill-tag">Cloud & DevOps</span>
                         </div>
                     </div>
-                    <a href="#" class="btn" style="margin-top: 30px;">Lebenslauf herunterladen</a>
                 </div>
             </div>
         </div>
@@ -926,9 +1019,9 @@
             </div>
             
             <div class="projects-grid">
-                <!-- Jarvis Projekt -->
-                <div class="project-card fade-in" data-category="ai">
-                    <img src="assets/jarvis-project.jpg" alt="Jarvis AI Assistant" class="project-image">
+                <!-- Jarvis AI Assistant -->
+                <div class="project-card wow-card fade-in" data-category="ai">
+                    <span class="project-icon"><i class="fas fa-robot"></i></span>
                     <div class="project-content">
                         <div class="project-tags">
                             <span class="project-tag">Python</span>
@@ -937,67 +1030,64 @@
                         </div>
                         <h3 class="project-title">Jarvis AI Assistant</h3>
                         <p class="project-description">
-                            Ein persönlicher KI-Assistent, der Spracherkennung nutzt, um verschiedene Aufgaben auszuführen und Fragen zu beantworten.
+                            Ein revolutionärer KI-Assistent mit Spracherkennung, Chatbot, Musiksteuerung und visueller Handerkennung. Gewinner bei Jugend Forscht.
                         </p>
                         <div class="project-links">
                             <a href="https://github.com/dev1-2/Jarvis" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Portfolio Website -->
-                <div class="project-card fade-in delay-1" data-category="web">
-                    <img src="assets/portfolio-project.jpg" alt="Portfolio Website" class="project-image">
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">CSS</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <h3 class="project-title">Portfolio Website</h3>
-                        <p class="project-description">
-                            Eine responsive Portfolio-Website zur Präsentation meiner Projekte und Fähigkeiten mit modernem Design.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/dev1-2/Jarvis/tree/main/Portfolio" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Babu Game Website -->
-                <div class="project-card fade-in delay-2" data-category="game">
-                    <img src="assets/babu-game.jpg" alt="Babu Game Website" class="project-image">
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">CSS</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <h3 class="project-title">Babu Game Website</h3>
-                        <p class="project-description">
-                            Eine Website für ein Spiel namens "Babu" mit interaktiven Elementen und ansprechendem Design.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/dev1-2/Jarvis/tree/main/babu%20game%20website" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Weitere Projekte aus dem Jarvis Repository -->
-                <div class="project-card fade-in delay-3" data-category="ai">
-                    <img src="assets/ai-project.jpg" alt="KI-Projekte" class="project-image">
+                <!-- TRON Spiel -->
+                <div class="project-card wow-card fade-in delay-1" data-category="game">
+                    <span class="project-icon"><i class="fas fa-gamepad"></i></span>
                     <div class="project-content">
                         <div class="project-tags">
                             <span class="project-tag">Python</span>
-                            <span class="project-tag">AI</span>
-                            <span class="project-tag">Machine Learning</span>
+                            <span class="project-tag">Pygame</span>
+                            <span class="project-tag">Game</span>
                         </div>
-                        <h3 class="project-title">KI-Experimente</h3>
+                        <h3 class="project-title">TRON Spiel</h3>
                         <p class="project-description">
-                            Verschiedene KI-basierte Experimente und Tools, die ich im Rahmen meines Jarvis-Projekts entwickelt habe.
+                            Ein actionreiches Multiplayer-TRON-Game, programmiert in Python mit Pygame. Schnelle Runden, coole Effekte und echtes Retro-Feeling!
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/dev1-2/tron" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Hand Tracking & Depth Estimation -->
+                <div class="project-card wow-card fade-in delay-2" data-category="ai">
+                    <span class="project-icon"><i class="fas fa-hand-sparkles"></i></span>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Computer Vision</span>
+                            <span class="project-tag">Pygame</span>
+                        </div>
+                        <h3 class="project-title">Hand Tracking & Depth Estimation</h3>
+                        <p class="project-description">
+                            Innovative KI-gestützte Handerkennung und Tiefenschätzung mit Echtzeit-Visualisierung. Nutzt Mediapipe und Transformer-Modelle.
                         </p>
                         <div class="project-links">
                             <a href="https://github.com/dev1-2/Jarvis" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Spotify Music Control -->
+                <div class="project-card wow-card fade-in delay-3" data-category="web">
+                    <span class="project-icon"><i class="fab fa-spotify"></i></span>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">API</span>
+                            <span class="project-tag">Spotipy</span>
+                        </div>
+                        <h3 class="project-title">Spotify Music Control</h3>
+                        <p class="project-description">
+                            Steuere Spotify direkt über Jarvis: Play, Pause, Skip und Track-Info mit intuitiver Sprachsteuerung und API-Anbindung.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/dev1-2/Jarvis/blob/main/spot.py" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -1011,102 +1101,50 @@
             <h2 class="section-title">Meine Fähigkeiten</h2>
             
             <div class="services-grid">
-                <!-- Skill 1 -->
+                <!-- Skill 1: Python Entwicklung -->
                 <div class="service-card fade-in">
                     <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
+                        <i class="fab fa-python"></i>
                     </div>
-                    <h3 class="service-title">Webentwicklung</h3>
+                    <h3 class="service-title">Python Entwicklung</h3>
                     <p class="service-description">
-                        Entwicklung moderner, responsiver Websites mit HTML, CSS und JavaScript. Fokus auf sauberen Code und optimaler Performance.
+                        Entwicklung von skalierbaren Backends, Automatisierungsskripten und APIs mit Python. Fokus auf Clean Code und Effizienz.
                     </p>
                 </div>
-                
-                <!-- Skill 2 -->
+                <!-- Skill 2: Künstliche Intelligenz -->
                 <div class="service-card fade-in delay-1">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="service-title">Künstliche Intelligenz</h3>
+                    <p class="service-description">
+                        Entwicklung und Training von KI- und Machine-Learning-Modellen für Spracherkennung, Bildverarbeitung und Automatisierung.
+                    </p>
+                </div>
+                <!-- Skill 3: Data Science -->
+                <div class="service-card fade-in delay-2">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="service-title">Data Science</h3>
+                    <p class="service-description">
+                        Analyse und Visualisierung von Daten, Entwicklung von Prognosemodellen und datengetriebene Entscheidungsfindung mit Python.
+                    </p>
+                </div>
+                <!-- Skill 4: Automatisierung & DevOps -->
+                <div class="service-card fade-in delay-3">
                     <div class="service-icon">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <h3 class="service-title">KI-Entwicklung</h3>
+                    <h3 class="service-title">Automatisierung & DevOps</h3>
                     <p class="service-description">
-                        Erstellung von KI-Assistenten und Spracherkennungssystemen mit Python und verschiedenen KI-Bibliotheken.
-                    </p>
-                </div>
-                
-                <!-- Skill 3 -->
-                <div class="service-card fade-in delay-2">
-                    <div class="service-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3 class="service-title">UI/UX Design</h3>
-                    <p class="service-description">
-                        Gestaltung benutzerfreundlicher Interfaces mit Fokus auf Ästhetik und Funktionalität für Web und mobile Anwendungen.
-                    </p>
-                </div>
-                
-                <!-- Skill 4 -->
-                <div class="service-card fade-in delay-3">
-                    <div class="service-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <h3 class="service-title">Spieleentwicklung</h3>
-                    <p class="service-description">
-                        Entwicklung von Spielen und interaktiven Anwendungen mit JavaScript und HTML5 Canvas.
+                        Automatisierung von Workflows, Deployment und Cloud-Integration mit Python, Docker und modernen DevOps-Tools.
                     </p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-        <div class="container">
-            <h2 class="section-title">Kontakt</h2>
-            
-            <div class="contact-container">
-                <div class="contact-info fade-in">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h4>Standort</h4>
-                            <p>Bremen, Deutschland</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h4>E-Mail</h4>
-                            <a href="mailto:jasper@helgehaas.de">jasper@helgehaas.de</a>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone-alt"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h4>Telefon</h4>
-                            <a href="tel:+4915906395757">+49 15906395757</a>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fab fa-github"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h4>GitHub</h4>
-                            <a href="https://github.com/dev1-2" target="_blank">github.com/dev1-2</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <form class="contact-form fade-in delay-1">
+            </div>
+            <div style="height:56px;"></div>
+                <form id="contact-formular" class="contact-form fade-in delay-1">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" class="form-control" placeholder="Dein Name" required>
@@ -1127,8 +1165,12 @@
                         <textarea id="message" class="form-control" placeholder="Deine Nachricht" required></textarea>
                     </div>
                     
-                    <button type="submit" class="btn">Nachricht senden</button>
+                    <button id="mail-send-btn" type="button" class="btn mail-btn">
+                        <i class="fas fa-paper-plane"></i> Mail an Jasper senden
+                    </button>
                 </form>
+                </div>
+                
             </div>
         </div>
     </section>
@@ -1140,39 +1182,42 @@
                 <div class="footer-col">
                     <h3>Jasper Haas</h3>
                     <p>
-                        Webentwickler und Designer mit Fokus auf moderne, benutzerfreundliche digitale Erlebnisse und KI-Anwendungen.
+                        Python Developer & KI-Spezialist. Fokus auf Data Science, Machine Learning, Automatisierung und smarte Backend-Lösungen mit Python.
                     </p>
                     <div class="footer-social">
                         <a href="https://github.com/dev1-2" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
                         <a href="https://instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-col">
-                    <h3>Schnelllinks</h3>
+                    <h3>Navigation</h3>
                     <ul class="footer-links">
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">Über mich</a></li>
                         <li><a href="#projects">Projekte</a></li>
-                        <li><a href="#skills">Fähigkeiten</a></li>
-                        <li><a href="#contact">Kontakt</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#contact-formular">Kontakt</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col">
-                    <h3>Projekte</h3>
+                    <h3>Python & KI Projekte</h3>
                     <ul class="footer-links">
-                        <li><a href="https://github.com/dev1-2/Jarvis" target="_blank">Jarvis AI Assistant</a></li>
-                        <li><a href="https://github.com/dev1-2/Jarvis/tree/main/Portfolio" target="_blank">Portfolio Website</a></li>
-                        <li><a href="https://github.com/dev1-2/Jarvis/tree/main/babu%20game%20website" target="_blank">Babu Game Website</a></li>
+                        <li><a href="https://github.com/dev1-2/Jarvis" target="_blank">Jarvis AI Assistant (Python, KI)</a></li>
+                        <li><a href="https://github.com/dev1-2/tron" target="_blank">TRON Game (Python, Pygame)</a></li>
+                        <li><a href="https://github.com/dev1-2/Jarvis/blob/main/spot.py" target="_blank">Spotify Music Control (Python, API)</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2023 Jasper Haas. Alle Rechte vorbehalten.</p>
+                <p>&copy; 2026 Jasper Haas. Python, KI & Data Science Portfolio.</p>
+                <div style="margin-top:28px;">
+                    <button class="btn" onclick="window.location.href='tel:+4915906395757'">
+                        <i class="fas fa-phone-alt"></i> Telefon: +49 15906395757
+                    </button>
+                </div>
             </div>
         </div>
     </footer>
@@ -1274,27 +1319,22 @@
             });
         });
         
-        // Form submission
-        const contactForm = document.querySelector('.contact-form');
-        
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Simulate form submission
-            const submitButton = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitButton.textContent;
-            
-            submitButton.textContent = 'Wird gesendet...';
-            submitButton.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                alert('Vielen Dank für deine Nachricht! Ich werde mich so schnell wie möglich bei dir melden.');
-                contactForm.reset();
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
-            }, 1500);
-        });
+        // Mail Button Funktion
+        const mailBtn = document.getElementById('mail-send-btn');
+        if (mailBtn) {
+            mailBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                const mailto = `mailto:jasper@helgehaas.de?subject=${encodeURIComponent(subject || 'Kontakt über Portfolio')}&body=${encodeURIComponent('Name: ' + name + '\nE-Mail: ' + email + '\n\nNachricht:\n' + message)}`;
+                window.location.href = mailto;
+                setTimeout(() => {
+                    alert('Falls sich kein Mailprogramm öffnet, kopiere bitte die Mailadresse und sende deine Nachricht manuell an jasper@helgehaas.de.');
+                }, 1200);
+            });
+        }
         
         // Intersection Observer for animations
         const observerOptions = {
