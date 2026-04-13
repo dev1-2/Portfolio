@@ -13,8 +13,6 @@
     return;
   }
 
-  const isMobile = window.innerWidth < 768;
-  const PARTICLE_COUNT = isMobile ? 35 : 80;
   const MAX_DIST = 150;
   const COLORS = [
     { r: 124, g: 58,  b: 237 }, // violet
@@ -26,6 +24,10 @@
   let H = window.innerHeight;
   let animId = null;
   let particles = [];
+
+  function getParticleCount() {
+    return window.innerWidth < 768 ? 35 : 80;
+  }
 
   function rand(min, max) {
     return Math.random() * (max - min) + min;
@@ -45,8 +47,9 @@
   }
 
   function init() {
+    const count = getParticleCount();
     particles = [];
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
+    for (let i = 0; i < count; i++) {
       particles.push(createParticle());
     }
   }

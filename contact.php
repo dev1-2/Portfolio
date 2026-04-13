@@ -30,7 +30,7 @@ if (!empty($honeypot)) {
 // ---- Time check (bot submits too fast) ----
 $formTime = isset($_POST['form_time']) ? intval($_POST['form_time']) : 0;
 if ($formTime > 0) {
-    $elapsed = time() - (intval($formTime) / 1000);
+    $elapsed = time() - ($formTime / 1000);
     if ($elapsed < 4) {
         echo json_encode(['success' => true, 'message' => 'Danke für deine Nachricht!']);
         exit;
