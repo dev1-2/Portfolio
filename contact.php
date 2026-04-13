@@ -30,7 +30,7 @@ if (!empty($honeypot)) {
 // ---- Time check (bot submits too fast) ----
 $formTime = isset($_POST['form_time']) ? intval($_POST['form_time']) : 0;
 if ($formTime > 0) {
-    $elapsed = time() - intval($formTime / 1000);
+    $elapsed = time() - (intval($formTime) / 1000);
     if ($elapsed < 4) {
         echo json_encode(['success' => true, 'message' => 'Danke für deine Nachricht!']);
         exit;
@@ -73,7 +73,10 @@ $body .= "E-Mail:  " . $safeEmail . "\n";
 $body .= "Nachricht:\n" . $safeMessage . "\n\n";
 $body .= "---\nGesendet am: " . date('d.m.Y H:i:s') . "\n";
 
-$headers  = "From: =?UTF-8?B?" . base64_encode($safeName) . "?= <noreply@jasperhaas.de>\r\n";
+// Strip newlines from name to prevent email header injection
+$safeNameHeader = str_replace(["\r", "\n", '%0a', '%0d'], '', $safeName);
+
+$headers  = "From: =?UTF-8?B?" . base64_encode($safeNameHeader) . "?= <noreply@jasperhaas.de>\r\n";
 $headers .= "Reply-To: " . $safeEmail . "\r\n";
 $headers .= "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";

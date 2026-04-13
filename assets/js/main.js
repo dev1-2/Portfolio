@@ -369,10 +369,7 @@ function submitForm(form) {
     })
     .finally(function () {
       submitEl.disabled = false;
-      submitEl.querySelector('[data-i18n]')
-        ? null
-        : (submitEl.textContent = i18n[lang].form_send);
-      // Re-apply i18n to button
+      // Re-apply translations (restores button label via data-i18n)
       applyLang(currentLang);
     });
 }
