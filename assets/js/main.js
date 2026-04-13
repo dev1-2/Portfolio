@@ -175,6 +175,7 @@ function initNav() {
     toggle.addEventListener('click', function () {
       const isOpen = links.classList.toggle('open');
       toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       toggle.setAttribute('aria-label', isOpen ? 'Menü schließen' : 'Menü öffnen');
     });
 
